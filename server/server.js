@@ -75,7 +75,7 @@ app.post('/all-short-notes', (req, res) => {
 // add a short note to the current location
 app.post('/add-short-note', (req, res) => {
 
-	let id = shortNotes.length;
+	let id = shortNotes.length + 1;
 	let username = req.body.username;
 	let location = req.body.location;
 	let note = req.body.note;

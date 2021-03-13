@@ -6,11 +6,11 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine-dark.css';
 const Saved = () => {
 
   const [shortNotes, setShortNotes] = useState([
-    { id: 0, date: "2021-03-07", username: "User1", location: {lat: 10.11111, lng: -12.11111 }, note: "Location 1" },
-    { id: 1, date: "2021-03-07", username: "User2", location: {lat: 9.11111, lng: -10.11111 }, note: "Location 2" },
-    { id: 2, date: "2021-03-08", username: "User3", location: {lat: 8.61111, lng: -8.11111 }, note: "Location 3" },
-    { id: 3, date: "2021-03-08", username: "User4", location: {lat: 8.11111, lng: -6.11111 }, note: "Location 4" },
-    { id: 4, date: "2021-03-08", username: "User5", location: {lat: 7.61111, lng: -4.11111 }, note: "Location 5" }
+    { id: 1, date: "2021-03-07", username: "User1", location: {lat: 10.11111, lng: -12.11111 }, note: "Location 1" },
+    { id: 2, date: "2021-03-07", username: "User2", location: {lat: 9.11111, lng: -10.11111 }, note: "Location 2" },
+    { id: 3, date: "2021-03-08", username: "User3", location: {lat: 8.61111, lng: -8.11111 }, note: "Location 3" },
+    { id: 4, date: "2021-03-08", username: "User4", location: {lat: 8.11111, lng: -6.11111 }, note: "Location 4" },
+    { id: 5, date: "2021-03-08", username: "User5", location: {lat: 7.61111, lng: -4.11111 }, note: "Location 5" }
   ]);
   const [gridApi, setGridApi] = useState(null);
   const [gridColumnApi, setGridColumnApi] = useState(null);
@@ -27,7 +27,7 @@ const Saved = () => {
 
     let data = await response.json();
     if(data && data.success === true) {
-      console.log("From Backend...");
+      console.log("From backend");
       return data.data;
     }
     return null;
@@ -58,10 +58,11 @@ const Saved = () => {
     setGridColumnApi(params.columnApi);
     setColumnsDefs([
       { headerName: "#", field: "id", sortable: true, filter: false, minWidth: 100 },
-      { headerName: "Date", field: "date", sortable: false, filter: true, minWidth: 200 },
+      { headerName: "Date", field: "date", sortable: true, filter: true, minWidth: 200 },
       { headerName: "Created User", field: "username", sortable: true, filter: true, minWidth: 100 },
-      { headerName: "Location", field: "location", sortable: true, filter: true, minWidth: 200 },
-      { headerName: "Note", field: "note", sortable: true, filter: true, minWidth: 400 },
+      { headerName: "Location (latitude)", field: "location.lat", sortable: true, filter: true, minWidth: 200 },
+      { headerName: "Location (longitude)", field: "location.lng", sortable: true, filter: true, minWidth: 200 },
+      { headerName: "Note", field: "note", sortable: true, filter: true, minWidth: 700 },
     ]);
   }
 
@@ -71,7 +72,11 @@ const Saved = () => {
 
   return (
     <div>
-      <div className="ag-theme-alpine-dark" style={{ height: 500, width: '100%' }}>
+      <h3>
+        You can sort and search for specific short note by each column. <br/>
+        You can also search with combination of multiple filters in multiple columns.
+      </h3>
+      <div className="ag-theme-alpine-dark" style={{ height: 450, width: '100%' }}>
         <AgGridReact
           onGridReady={onGridReady}
           columnDefs={columnsDefs}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import GoogleMap from 'google-map-react';
 import axios from 'axios';
 import Pusher from 'pusher-js';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import SaveShortNote from './SaveShortNote';
@@ -142,7 +142,7 @@ const MapContainer = (props) => {
 
   return (
     <div>
-      <SaveShortNote currentUser={currentUser}/>
+      <SaveShortNote currentUser={currentUser} location={locations.currentUser}/>
       <GoogleMap
         style={mapStyles}
         bootstrapURLKeys={{ key: 'AIzaSyDVjzPdNCZx39hunAmxrmMbbbnNTqJbhU4' }}
